@@ -56,9 +56,9 @@ def load_exr_to_numpy(filename, mode='RGBD'):
 
     FLOAT = Imath.PixelType(Imath.PixelType.FLOAT)
 
-    R = np.frombuffer(exr_file.channel('R', FLOAT), dtype=np.float32).reshape(height, width)
-    G = np.frombuffer(exr_file.channel('G', FLOAT), dtype=np.float32).reshape(height, width)
-    B = np.frombuffer(exr_file.channel('B', FLOAT), dtype=np.float32).reshape(height, width)
+    R = np.frombuffer(exr_file.channel('R', FLOAT), dtype=np.float32).reshape(height, width) * 255.0 # 0-1 in exr format
+    G = np.frombuffer(exr_file.channel('G', FLOAT), dtype=np.float32).reshape(height, width) * 255.0
+    B = np.frombuffer(exr_file.channel('B', FLOAT), dtype=np.float32).reshape(height, width) * 255.0
     D = np.frombuffer(exr_file.channel('D', FLOAT), dtype=np.float32).reshape(height, width)
 
     rgbd_image = np.stack((R, G, B, D), axis=-1)
